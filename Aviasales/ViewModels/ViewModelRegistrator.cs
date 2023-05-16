@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace Aviasales.ViewModels
 {
-    class ViewModelLocator
+    static class ViewModelRegistrator
     {
-        public MainWindowViewModel WindowViewModel => App.Services.GetRequiredService<MainWindowViewModel>();
+        public static IServiceCollection AddViewModels(this IServiceCollection services) => services;
+
+
+
     }
 }
-    

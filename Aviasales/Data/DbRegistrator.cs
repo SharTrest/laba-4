@@ -28,6 +28,7 @@ namespace Aviasales.Data
                 }
 
             }
-            ); 
+            )
+            .AddTransient<DbInitial>(); 
     }
 }

@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aviasales", "Aviasales\Aviasales.csproj", "{54E6D5AC-2454-4264-8137-E1680A5C67E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aviasales.DAL", "Aviasales.DAL\Aviasales.DAL.csproj", "{F36173E0-906C-4982-B259-FB5840E5491E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aviasales.DAL", "Aviasales.DAL\Aviasales.DAL.csproj", "{F36173E0-906C-4982-B259-FB5840E5491E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aviasales.Interfaces", "Aviasales.Interfaces\Aviasales.Interfaces.csproj", "{0B3EB3CA-BE76-400D-AE30-2AE9902B65FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F36173E0-906C-4982-B259-FB5840E5491E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F36173E0-906C-4982-B259-FB5840E5491E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F36173E0-906C-4982-B259-FB5840E5491E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3EB3CA-BE76-400D-AE30-2AE9902B65FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3EB3CA-BE76-400D-AE30-2AE9902B65FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3EB3CA-BE76-400D-AE30-2AE9902B65FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3EB3CA-BE76-400D-AE30-2AE9902B65FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

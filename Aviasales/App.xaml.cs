@@ -1,4 +1,5 @@
-﻿using Aviasales.Services;
+﻿using Aviasales.Data;
+using Aviasales.Services;
 using Aviasales.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +25,7 @@ namespace Aviasales
         public static IServiceProvider Services => Host.Services;
 
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
+            .AddDatabase(host.Configuration.GetSection("Database"))
             .AddServices()
             .AddViewModels()
             ;  
@@ -31,11 +33,15 @@ namespace Aviasales
         protected override async void OnStartup(StartupEventArgs e)
         {
             var host = Host;
+
+            using (var scope = Services.CreateScope())
+                await scope.ServiceProvider.GetRequiredService<DbInitial>().InitialAsync();
+
             base.OnStartup(e);
             await host.StartAsync();
         }
 
-        protected override async void OnExit(ExitEventArgs e)
+        protected override async void OnExit(ExitEventArgs e) 
         {
             using var host = Host;
             base.OnExit(e);

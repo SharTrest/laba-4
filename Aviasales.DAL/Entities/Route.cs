@@ -12,3 +12,4 @@ namespace Aviasales.DAL.Entities
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }
+

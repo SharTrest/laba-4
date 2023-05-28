@@ -1,6 +1,7 @@
 ﻿using Aviasales.DAL.Context;
 using Aviasales.DAL.Entities;
 using MathCore.PE.Headers;
+using MathCore.Statistic.RandomNumbers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -53,7 +54,7 @@ namespace Aviasales.Data
         private const int _RatesCount = 3;
 
         private async Task InitilRates()
-        { 
+        {
             _Rates = new Rate[_RatesCount];
             for (var i = 0; i < _RatesCount; i++)
                 _Rates[i] = new Rate
@@ -65,21 +66,34 @@ namespace Aviasales.Data
             await _db.SaveChangesAsync();
         }
 
-        private const int _RoutesCount = 10;
+        private const int _RoutesCount = 100;
         private Route[] _Routes;
 
         private async Task InitialRoutes()
         {
             _Routes = new Route[_RoutesCount];
+            var random = new Random();
+
             for (var i = 0; i < _RoutesCount; i++)
+            {
+                int companyName = random.Next(1,4);
+                int point1 = 0;
+                int point2 = 0;
+                while (point1 == point2)
+                {
+                    point1 = random.Next(1, 10);
+                    point2 = random.Next(1, 10);
+                }
                 _Routes[i] = new Route
                 {
-                    Name = $"40{i}",
-                    StartPoint = $"Населенный пункт{i}",
-                    EndPoint = $"Населенный пункт {i + 10}",
-                    Distance = i * 100
-
+                    Name = ChoiceName(companyName),
+                    StartPoint = ChoicePoint(point1),
+                    EndPoint = ChoicePoint(point2),
+                    Distance = 900 + i * 100,
+                    Date = DateOnly.FromDateTime(RandomDay(random)).ToString(),
+                    Time = RandomTime(random).ToString()
                 };
+            }
 
             await _db.Routes.AddRangeAsync(_Routes);
             await _db.SaveChangesAsync();
@@ -94,14 +108,69 @@ namespace Aviasales.Data
             _Tickets = Enumerable.Range(1, _TicketCount)
                 .Select(i => new Ticket
                 {
-                    Name = $"Маршрут {i}",
+                    Name = $"User {i}",
                     Rate = random.NextItem(_Rates),
                     Route = random.NextItem(_Routes),
-                    Cost = 10000
+                    Cost = 10000,
                 })
                 .ToArray();
             await _db.Tickets.AddRangeAsync(_Tickets);
             await _db.SaveChangesAsync();
+        }
+        DateTime RandomDay(Random gen)
+        {
+            DateTime start = new DateTime(2024, 1, 1);
+            int range = (start - DateTime.Today).Days;
+            return start.AddDays(gen.Next(range));
+        }
+
+        TimeSpan RandomTime(Random rnd)
+        {
+            return TimeSpan.FromMinutes(rnd.Next(24 * 4) * 15);
+        }
+
+        string ChoiceName(int n)
+        {
+            switch (n)
+            {
+                case 1:
+                    return "Победа";
+                case 2:
+                    return "Аэрофлот";
+                case 3:
+                    return "S7 Airlines";
+                case 4:
+                    return "Уральские авиалинии";
+            }
+            return "";
+        }
+
+        string ChoicePoint(int p)
+        {
+            switch (p)
+            {
+                case 1:
+                    return "Москва";
+                case 2:
+                    return "Нижний Новгород";
+                case 3:
+                    return "Мурманск";
+                case 4:
+                    return "Курск";
+                case 5:
+                    return "Рязань";
+                case 6:
+                    return "Орск";
+                case 7:
+                    return "Санкт-Петербург";
+                case 8:
+                    return "Казань";
+                case 9:
+                    return "Хабаровск";
+                case 10:
+                    return "Кемерово";
+            }
+            return "";
         }
     }
 }

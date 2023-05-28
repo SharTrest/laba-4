@@ -1,4 +1,5 @@
-﻿using Aviasales.DAL.Context;
+﻿using Aviasales.DAL;
+using Aviasales.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,8 @@ namespace Aviasales.Data
 
             }
             )
-            .AddTransient<DbInitial>(); 
+            .AddTransient<DbInitial>()
+            .AddRepositoriesInDB()
+            ; 
     }
 }

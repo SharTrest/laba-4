@@ -3,10 +3,11 @@ using Aviasales.Interfaces;
 using Aviasales.DAL.Entities.Base;
 using Aviasales.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using Aviasales.DAL.Entities;
 
 namespace Aviasales.DAL
 {
-    class DbRepository<T> : IRepository<T> where T : Entity, new()
+    internal class DbRepository<T> : IRepository<T> where T : Entity, new()
     {
         private readonly AviasalesDB _db;
         private readonly DbSet<T> _Set;
@@ -44,7 +45,8 @@ namespace Aviasales.DAL
 
         public async Task<T> GetAsync(int id, CancellationToken Cancel = default) => await Items
             .SingleOrDefaultAsync(item => item.ID == id, Cancel)
-            .ConfigureAwait(false);
+            .ConfigureAwait(false)
+            ;
 
         public void Update(T item)
         {
@@ -78,5 +80,13 @@ namespace Aviasales.DAL
                 await _db.SaveChangesAsync().ConfigureAwait(false);
         }
 
+    }
+
+    class TicketsRepository : DbRepository<Ticket>
+    {
+        public override IQueryable<Ticket> Items => base.Items
+            .Include(item => item.Rate)
+            .Include(item => item.Route);
+        public TicketsRepository(AviasalesDB db) : base(db) {}
     }
 }

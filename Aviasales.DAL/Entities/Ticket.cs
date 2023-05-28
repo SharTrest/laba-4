@@ -16,5 +16,6 @@ namespace Aviasales.DAL.Entities
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Cost { get; set; }
+
     }
 }

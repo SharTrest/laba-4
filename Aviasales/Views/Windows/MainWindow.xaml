@@ -20,10 +20,17 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
@@ -59,8 +66,88 @@
             <Border Grid.Row="3" Grid.Column="0">
                 <TextBlock Text="{Binding Count}" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
+            <Border Grid.Row="6" Grid.Column="0">
+                <TextBlock Text="Время вылета" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="6" Grid.Column="1">
+                <TextBox Text="{Binding StartTime}" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="0" Grid.Column="4">
+                <TextBlock Text="Начальная точка" Width="157" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="4">
+                <TextBox Text="{Binding StartPoint}" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="6" Grid.Column="4">
+                <TextBlock Text="Класс билета" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="6" Grid.Column="5">
+                <TextBox Text="{Binding RateClass}" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="7" Grid.RowSpan="3" Grid.Column="4" Grid.ColumnSpan="3">
+                <ListView ItemsSource="{Binding TicketsRates}" Margin="20,30,20,20" Background="#212529" SelectedItem="SelectedMessage">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Номер рейса" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" Width="150" MaxHeight="20" FontSize="16" Foreground="White"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+            <Border Grid.Row="7" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3">
+                <ListView ItemsSource="{Binding Tickets}" Margin="20,30,20,20" Background="#212529" SelectedItem="SelectedMessage">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Номер рейса" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TicketNumber}" Width="150" MaxHeight="20" FontSize="16" Foreground="White"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Время" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Time}" Width="150" MaxHeight="20" FontSize="16" Foreground="White"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+            <Border Grid.Row="2"  Grid.RowSpan="4" Grid.Column="4" Grid.ColumnSpan="3">
+                <ListView ItemsSource="{Binding Companies}" Margin="20,30,20,20" Background="#212529" SelectedItem="SelectedMessage">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Номер рейса" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding CompanyName}" Width="150" MaxHeight="20" FontSize="16" Foreground="White"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Время" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding StartPoint}" Width="150" MaxHeight="20" FontSize="16" Foreground="White"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
             <Button Content="Max" Command="{Binding ShowMaxTicketCostCommand}" Grid.Column="0" Grid.Row="4" Width="100" Height="30"/>
             <Button Content="Count" Command="{Binding ShowCountEndPointCommand}" Grid.Column="1" Grid.Row="4" Width="100" Height="30"/>
+            <Button Content="Before Starttime" Command="{Binding ShowTicketsBeforeCommand}" Grid.Column="0" Grid.Row="10" Width="100" Height="30"/>
+            <Button Content="Rates" Command="{Binding ShowTicketesByRateClassCommand}" Grid.Column="4" Grid.Row="10" Width="100" Height="30"/>
+            <Button Content="Найти авиакомпании" Command="{Binding ShowAviacompanyCommand}" Grid.Column="5" Grid.Row="1" Width="100" Height="30"/>
         </Grid>
     </DockPanel>
 </Window>

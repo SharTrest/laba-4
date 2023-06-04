@@ -35,7 +35,7 @@ namespace Aviasales
             var host = Host;
 
             using (var scope = Services.CreateScope())
-                await scope.ServiceProvider.GetRequiredService<DbInitial>().InitialAsync();
+                 scope.ServiceProvider.GetRequiredService<DbInitial>().InitialAsync().Wait();
 
             base.OnStartup(e);
             await host.StartAsync();

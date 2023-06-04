@@ -60,7 +60,7 @@ namespace Aviasales.Data
                 _Rates[i] = new Rate
                 {
                     Name = $"Место категории {i}",
-                    Multiplier = (decimal)i
+                    Multiplier = (decimal)(i + 1)
                 };
             await _db.Rates.AddRangeAsync(_Rates);
             await _db.SaveChangesAsync();
@@ -99,19 +99,19 @@ namespace Aviasales.Data
             await _db.SaveChangesAsync();
         }
 
-        private const int _TicketCount = 5;
+        private const int _TicketCount = 100;
         private Ticket[] _Tickets;
 
         private async Task InitialTickets()
         {
             var random = new Random();
-            _Tickets = Enumerable.Range(1, _TicketCount)
+            _Tickets = Enumerable.Range(0, _TicketCount)
                 .Select(i => new Ticket
                 {
-                    Name = $"User {i}",
+                    Name = $"Рейс {i+1}",
                     Rate = random.NextItem(_Rates),
                     Route = random.NextItem(_Routes),
-                    Cost = 10000,
+                    Cost = _Routes[i/3].Distance * _Rates[i%3].Multiplier,
                 })
                 .ToArray();
             await _db.Tickets.AddRangeAsync(_Tickets);

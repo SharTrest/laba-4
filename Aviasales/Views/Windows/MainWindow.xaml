@@ -3,13 +3,64 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Aviasales"
         DataContext="{Binding Path=WindowViewModel, Source= {StaticResource Locator}}"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="450" 
-        Width="800">
-    <Grid>
+        Height="1080" 
+        Width="1920">
 
-    </Grid>
+    <DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" Grid.Column="0">
+                <TextBlock Text="Номер рейса" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="0" Grid.Column="1">
+                <TextBlock Text="Авиакомпания" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border  Grid.Row="0" Grid.Column="2">
+                <TextBlock Text="Цена" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="0">
+                <TextBlock Text="Количество рейсов" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="1">
+                <TextBlock Text="Конечный пункт" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="0">
+                <TextBlock Text="{Binding Number}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1">
+                <TextBox Text="{Binding Company}" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="2">
+                <TextBlock Text="{Binding Cost}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="1">
+                <TextBox Text="{Binding CountEndPoint}" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="0">
+                <TextBlock Text="{Binding Count}" Width="150" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <Button Content="Max" Command="{Binding ShowMaxTicketCostCommand}" Grid.Column="0" Grid.Row="4" Width="100" Height="30"/>
+            <Button Content="Count" Command="{Binding ShowCountEndPointCommand}" Grid.Column="1" Grid.Row="4" Width="100" Height="30"/>
+        </Grid>
+    </DockPanel>
 </Window>
